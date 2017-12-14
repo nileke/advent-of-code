@@ -1,4 +1,4 @@
-package second;
+package first;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
