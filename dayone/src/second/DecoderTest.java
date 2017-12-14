@@ -1,9 +1,7 @@
-import junit.framework.Assert;
-import junit.framework.JUnit4TestAdapter;
-import junit.framework.TestCase;
-import org.junit.Test;
+package first;
 
-import static org.junit.Assert.*;
+import junit.framework.Assert;
+import junit.framework.TestCase;
 
 /**
  * Nils Ekenbäck
