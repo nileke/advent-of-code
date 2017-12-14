@@ -8,23 +8,23 @@ import junit.framework.TestCase;
  * nilsek@kth.se
  * advent-of-code Date: 2017-12-14
  */
-public class DecoderTest extends TestCase {
+public class DecodeFirstTest extends TestCase {
 
-    private Decoder decoder;
+    private DecodeFirst decodeFirst;
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        decoder = new Decoder("data/test_input.txt");
+        decodeFirst = new DecodeFirst("data/test_input.txt");
     }
 
     public void testFileRead() {
-        String in = decoder.getFileContent();
+        String in = decodeFirst.getFileContent();
         Assert.assertEquals("91212129", in);
     }
 
     public void testParseInput() {
-        int parsedIn = decoder.parseInput();
+        int parsedIn = decodeFirst.parseInput();
         Assert.assertEquals(9, parsedIn);
     }
 

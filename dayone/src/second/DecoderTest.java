@@ -10,22 +10,22 @@ import junit.framework.TestCase;
  */
 public class DecoderTest extends TestCase {
 
-    private Decoder decoder;
+    private DecodeSecond decodeFirst;
 
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        decoder = new Decoder("data/test_input.txt");
+        decodeFirst = new DecodeSecond("data/test_input2.txt");
     }
 
     public void testFileRead() {
-        String in = decoder.getFileContent();
-        Assert.assertEquals("91212129", in);
+        String in = decodeFirst.getFileContent();
+        Assert.assertEquals("12131415", in);
     }
 
     public void testParseInput() {
-        int parsedIn = decoder.parseInput();
-        Assert.assertEquals(9, parsedIn);
+        int parsedIn = decodeFirst.parseInput();
+        Assert.assertEquals(4, parsedIn);
     }
 
 }

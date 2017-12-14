@@ -1,4 +1,4 @@
-package second;
+package first;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,11 +10,11 @@ import java.util.Scanner;
  * advent-of-code Date: 2017-12-14
  */
 
-public class Decoder {
+public class DecodeFirst {
     private String filepath;
     private String fileContent;
 
-    public Decoder(String filepath) {
+    public DecodeFirst(String filepath) {
         this.filepath = filepath;
         setFileContent();
     }
