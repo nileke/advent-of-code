@@ -8,16 +8,16 @@ import java.util.Scanner;
  * advent-of-code Date: 2017-12-14
  */
 
-public class Decoder {
+public class Decode {
     private String filepath;
     private String fileContent;
 
-    public Decoder(String filepath) {
+    public Decode(String filepath) {
         this.filepath = filepath;
         setFileContent();
     }
 
-    public int parseInput() {
+    public int parseInputOne() {
         int captcha = 0;
         String[] digits = fileContent.split("(?<=.)");
         int x = (Integer.parseInt(digits[0]));
@@ -32,6 +32,24 @@ public class Decoder {
             if (x == y) {
                 captcha += x;
             }
+        }
+        return captcha;
+    }
+
+    public int parseInputTwo() {
+        int captcha = 0;
+        String[] digits = fileContent.split("(?<=.)");
+        int halfLength = digits.length/2;
+        for (int n=0; n < digits.length-1; n++) {
+            if (halfLength == digits.length) {
+                halfLength = 0;
+            }
+            int x = Integer.parseInt(digits[n]);
+            int y = Integer.parseInt(digits[halfLength]);
+            if (x == y) {
+                captcha += x;
+            }
+            halfLength++;
         }
         return captcha;
     }
