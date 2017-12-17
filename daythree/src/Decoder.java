@@ -45,6 +45,9 @@ public class Decoder {
     void calculate(double myInput) {
         double sqrtInput = Math.sqrt(myInput);
         double rightCorner = Math.round(sqrtInput);
+        if (rightCorner % 2 == 0) {
+            rightCorner += 1;
+        }
         double sideLength = (rightCorner-1); // rightCorner - 1 == layer in the spiral for myInput
         double tmp = (rightCorner*rightCorner - myInput);
         double[] vectorOne = {sideLength/2, sideLength/2};
