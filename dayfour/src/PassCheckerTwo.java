@@ -1,14 +1,15 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
-public class PassChecker {
+public class PassCheckerTwo {
 
     private ArrayList<String> passphrases;
     private int validPassphrases;
 
-    PassChecker(String inputFile) throws FileNotFoundException {
+    PassCheckerTwo(String inputFile) throws FileNotFoundException {
         Scanner sc = new Scanner(new File(inputFile));
         passphrases = new ArrayList<>();
         while (sc.hasNextLine()) {
@@ -19,19 +20,23 @@ public class PassChecker {
     }
 
     // Constructor for tests
-    PassChecker(ArrayList<String> passphrases) {
+    PassCheckerTwo(ArrayList<String> passphrases) {
         this.passphrases = passphrases;
     }
 
 
     static boolean validPass(String inString) {
         String[] phrase = inString.split("\\s+");
-        ArrayList<String> usedWords = new ArrayList<>();
+        ArrayList<char[]> usedWords = new ArrayList<>();
         for (String word : phrase) {
-            if (usedWords.contains(word)) {
-                return false;
+            char[] inChars = word.toCharArray();
+            Arrays.sort(inChars);
+            for (char[] w : usedWords) {
+                if (Arrays.equals(inChars, w)) {
+                    return false;
+                }
             }
-            usedWords.add(word);
+            usedWords.add(inChars);
         } return true;
     }
 
@@ -43,15 +48,15 @@ public class PassChecker {
         int count = 0;
         for (String line : this.passphrases ) {
             line.replace("\n", "");
-            if (PassChecker.validPass(line)) {
+            if (validPass(line)) {
                 count++;
             }
         } return count;
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        PassChecker passChecker = new PassChecker("data/input.txt");
-        System.out.println(passChecker.countValid());
+        PassCheckerTwo passCheckerTwo = new PassCheckerTwo("dayfour/data/input.txt");
+        System.out.println("Second half answer: " + passCheckerTwo.countValid());
 
     }
 
