@@ -22,15 +22,24 @@ public class RunMaze {
         //int[] maze = new int[tmp.size()];
         Integer [] m = tmp.toArray(new Integer[tmp.size()]);
         MazeRunner maze = new MazeRunner(m);
-        navigateMaze(maze);
+        MazeRunner mazeTwo = new MazeRunner(m);
+        // System.out.println(navigateMaze(maze));
+        System.out.println(navigateSecondMaze(mazeTwo));
     }
 
-    static void navigateMaze(MazeRunner maze) {
+    private static int navigateMaze(MazeRunner maze) {
         boolean escapedMaze = false;
         while (!escapedMaze) {
             escapedMaze = maze.navigateMaze();
         }
-        System.out.println(maze.getSteps());
+        return maze.getSteps();
+    }
 
+    private static int navigateSecondMaze(MazeRunner maze) {
+        boolean escapedMaze = false;
+        while (!escapedMaze) {
+            escapedMaze = maze.navigateSecondMaze();
+        }
+        return maze.getSteps();
     }
 }

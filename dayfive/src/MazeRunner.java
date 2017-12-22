@@ -30,6 +30,23 @@ public class MazeRunner {
         return false;
     }
 
+    boolean navigateSecondMaze() {
+        try {
+            tmpidx = maze[idx];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return true;
+        }
+        if (maze[idx] < 3) {
+            maze[idx] += 1;
+        } else {
+            maze[idx] -= 1;
+        }
+
+        idx = idx + tmpidx;
+        steps++;
+        return false;
+    }
+
     public int getSteps() {
         return steps;
     }

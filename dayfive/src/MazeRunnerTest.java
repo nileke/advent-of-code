@@ -1,7 +1,7 @@
 import junit.framework.TestCase;
-import org.junit.Assert;
+import junit.framework.Assert;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
 
 /**
  * Nils Ekenbäck
@@ -13,16 +13,32 @@ public class MazeRunnerTest extends TestCase {
     public void testNavigateMaze() {
         Integer[] mazeArray = {0,3,0,1,-3};
         MazeRunner maze = new MazeRunner(mazeArray);
-        Assert.assertFalse(maze.navigateMaze());
-        Assert.assertEquals(0, maze.idx);
-        Assert.assertEquals(1, maze.getSteps());
-        Assert.assertFalse(maze.navigateMaze());
-        Assert.assertEquals(1, maze.idx);
-        Assert.assertFalse(maze.navigateMaze());
-        Assert.assertFalse(maze.navigateMaze());
-        Assert.assertFalse(maze.navigateMaze());
-        Assert.assertTrue(maze.navigateMaze());
-        Assert.assertEquals(5, maze.getSteps());
+        assertFalse(maze.navigateMaze());
+        assertEquals(0, maze.idx);
+        assertEquals(1, maze.getSteps());
+        assertFalse(maze.navigateMaze());
+        assertEquals(1, maze.idx);
+        assertFalse(maze.navigateMaze());
+        assertFalse(maze.navigateMaze());
+        assertFalse(maze.navigateMaze());
+        assertTrue(maze.navigateMaze());
+        assertEquals(5, maze.getSteps());
+
+    }
+
+    public void testNavigateSecondMaze() {
+        Integer[] mazeArray = {0,3,0,1,-3};
+        MazeRunner maze = new MazeRunner(mazeArray);
+        assertFalse(maze.navigateSecondMaze());
+        assertEquals(0, maze.idx);
+        assertEquals(1, maze.getSteps());
+        for (int i=0; i<8; i++) {
+            assertFalse(maze.navigateSecondMaze());
+        }
+        assertFalse(maze.navigateSecondMaze());
+        assertTrue(maze.navigateSecondMaze());
+        assertArrayEquals(new Integer[]{2, 3, 2, 3, -1}, maze.maze);
+        assertEquals(10, maze.getSteps());
 
     }
 
