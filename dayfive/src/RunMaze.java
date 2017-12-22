@@ -19,15 +19,17 @@ public class RunMaze {
         while (sc.hasNextLine()) {
             tmp.add(Integer.parseInt(sc.nextLine()));
         }
-        //int[] maze = new int[tmp.size()];
+
         Integer [] m = tmp.toArray(new Integer[tmp.size()]);
         MazeRunner maze = new MazeRunner(m);
+        System.out.println(navMaze(maze));
+        m = tmp.toArray(new Integer[tmp.size()]);
         MazeRunner mazeTwo = new MazeRunner(m);
-        // System.out.println(navigateMaze(maze));
-        System.out.println(navigateSecondMaze(mazeTwo));
+        System.out.println(navSecondMaze(mazeTwo));
+
     }
 
-    private static int navigateMaze(MazeRunner maze) {
+    private static int navMaze(MazeRunner maze) {
         boolean escapedMaze = false;
         while (!escapedMaze) {
             escapedMaze = maze.navigateMaze();
@@ -35,7 +37,7 @@ public class RunMaze {
         return maze.getSteps();
     }
 
-    private static int navigateSecondMaze(MazeRunner maze) {
+    private static int navSecondMaze(MazeRunner maze) {
         boolean escapedMaze = false;
         while (!escapedMaze) {
             escapedMaze = maze.navigateSecondMaze();
