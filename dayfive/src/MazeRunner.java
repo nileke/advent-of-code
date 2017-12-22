@@ -7,23 +7,26 @@ public class MazeRunner {
 
     int idx;
     int tmpidx;
-    int[] maze;
+    Integer[] maze;
     int steps;
 
-    MazeRunner(int[] maze) {
+    MazeRunner() { }
+
+    MazeRunner(Integer[] maze) {
         this.idx = 0;
         this.steps = 0;
         this.maze = maze;
     }
 
-    boolean navigate() {
-        tmpidx = maze[idx];
+    boolean navigateMaze() {
         try {
+            tmpidx = maze[idx];
             maze[idx] += 1;
-        } catch (IndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             return true;
         }
-        idx = tmpidx;
+        idx = idx + tmpidx;
+        steps++;
         return false;
     }
 
