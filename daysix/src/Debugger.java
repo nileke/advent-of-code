@@ -8,16 +8,15 @@ public class Debugger {
     private final int[] inputBank;
 
     public Debugger(String filepath) throws FileNotFoundException {
-        // scan input.txt
         File f = new File(filepath);
         inputBank = readInput(f);
-        debugInput();
+        //debugInput();
     }
 
     // Constructor for testing
     public Debugger(int[] inputBank) {
         this.inputBank = inputBank;
-        debugInput();
+        //debugInput();
     }
 
     int[] readInput(File file) throws FileNotFoundException {
@@ -38,16 +37,11 @@ public class Debugger {
     public int debugInput() {
         Cycler cycler = new Cycler(inputBank);
         ArrayList<int[]> generatedCycles = new ArrayList<>();
-        int count = 0;
-        while (true) {
-            if (cycler.getLastCycle() != null) {
-                int[] lastCycle = cycler.getLastCycle().clone();
-                if (isInList(generatedCycles, lastCycle)) {
-                    break;
-                }
-                generatedCycles.add(lastCycle);
-            }
-            cycler.cycleBank();
+        int[] lastCycle = cycler.cycleBank().clone();
+        int count = 1; // First cycle
+        while (!inList(generatedCycles, lastCycle)) {
+            generatedCycles.add(lastCycle);
+            lastCycle = cycler.cycleBank().clone();
             count++;
         }
         return count;
@@ -57,22 +51,14 @@ public class Debugger {
         return list.parallelStream().anyMatch(a -> Arrays.equals(a, candidate));
     }
 
-    public static boolean isInList(final List<int[]> list, final int[] candidate){
-        for(final int[] item : list){
-            if(Arrays.equals(item, candidate)){
-                return true;
-            }
-        }
-        return false;
-    }
-
-
     public static void main(String[] args)  {
         String filepath = "data/input.txt";
         try {
-            new Debugger(filepath);
+            Debugger debugger = new Debugger(filepath);
+            System.out.println(debugger.debugInput());
         } catch (FileNotFoundException e) {
             System.out.println("File not found, check filepath");
         }
+
     }
 }

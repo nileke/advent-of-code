@@ -19,16 +19,11 @@ public class CyclerTest extends TestCase {
         int[] thirdCycle = new int[] {0, 2, 3, 4};
         int[] fourthCycle = new int[] {1, 3, 4, 1};
         Cycler cycler = new Cycler(block);
-        cycler.cycleBank();
-        assertArrayEquals(cycler.getLastCycle(), firstCycle);
-        cycler.cycleBank();
-        assertArrayEquals(cycler.getLastCycle(), secondCycle);
-        cycler.cycleBank();
-        assertArrayEquals(cycler.getLastCycle(), thirdCycle);
-        cycler.cycleBank();
-        assertArrayEquals(cycler.getLastCycle(), fourthCycle);
-        cycler.cycleBank();
-        assertArrayEquals(cycler.getLastCycle(), firstCycle);
+        assertArrayEquals(cycler.cycleBank(), firstCycle);
+        assertArrayEquals(cycler.cycleBank(), secondCycle);
+        assertArrayEquals(cycler.cycleBank(), thirdCycle);
+        assertArrayEquals(cycler.cycleBank(), fourthCycle);
+        assertArrayEquals(cycler.cycleBank(), firstCycle);
 
     }
 
