@@ -9,8 +9,9 @@ public class ProgramTreeTest extends TestCase {
         ProgramTree testTree = new ProgramTree();
 
         testTree.readInput("dsstjf (100) -> cvchqoz, jirnr");
+        testTree.readInput("sadasd (52) -> dsstjf");
         ArrayList<CompositeNode> programList = testTree.getProgramList();
-        assertEquals(3, testTree.getProgramList().size());
+        assertEquals(4, testTree.getProgramList().size());
 
         CompositeNode parent = testTree.getProgramList().get(2);
         CompositeNode childOne = programList.get(0);
@@ -21,6 +22,7 @@ public class ProgramTreeTest extends TestCase {
         assertEquals(100, parent.getWeight());
         assertEquals("dsstjf", childOne.getParent().getProgram());
         assertEquals("dsstjf", childTwo.getParent().getProgram());
+        assertEquals("sadasd", parent.getParent().getProgram());
 
         // assertEquals("cvchqoz", children.get(0).getProgram());
         // assertEquals("jirnr", children.get(1).getProgram());

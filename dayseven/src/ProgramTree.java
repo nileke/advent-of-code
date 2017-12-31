@@ -20,7 +20,6 @@ public class ProgramTree {
 
 
     void readInput(String line) {
-        // TODO Make code cleaner
         Scanner scLine = new Scanner(line);
 
         // Create parent node, find int for weight
@@ -29,28 +28,23 @@ public class ProgramTree {
         programWeight = programWeight.substring(1,programWeight.length()-1);
         CompositeNode parent = new CompositeNode(programName, Integer.parseInt(programWeight));
 
-        // search for '->' for children
+        // search for children
         if ((scLine.findInLine("->") != null)) {
-            // get children and create nodes
-            
             scan:
             while (scLine.hasNext()) {
                 String childName = scLine.next();
-                // COMPLETE check if node already exists in programList
-                // TODO Test that break loop for already existing nodes in programList
+                childName = childName.replace(",", "");
                 for (CompositeNode node : this.programList) {
                     if (node.getProgram().equalsIgnoreCase(childName)) {
                         node.addParent(parent);
                         break scan;
                     }
                 } 
-                childName = childName.replace(",", "");
                 CompositeNode child = new CompositeNode(childName);
                 child.addParent(parent);
                 programList.add(child);
             }
         }
-        // add parent node to programList
         programList.add(parent);
     }
 
