@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class Debugger {
@@ -11,13 +10,11 @@ public class Debugger {
     public Debugger(String filepath) throws FileNotFoundException {
         File f = new File(filepath);
         inputBank = readInput(f);
-        //debugInput();
     }
 
     // Constructor for testing
     public Debugger(int[] inputBank) {
         this.inputBank = inputBank;
-        //debugInput();
     }
 
     int[] readInput(File file) throws FileNotFoundException {
@@ -62,7 +59,6 @@ public class Debugger {
             lastCycle = cycler.cycleBank().clone();
             count++;
         }
-        // return count;
     }
 
 
