@@ -1,23 +1,33 @@
 import java.util.ArrayList;
 
-public class CompositeNode {
+public class CompositeNode extends AbstractNode {
 
     private String program;
     private int weight;
-    private ArrayList<CompositeNode> children = new ArrayList<>();
+    private ArrayList<AbstractNode> children = new ArrayList<>();
     private CompositeNode parent;
 
+    CompositeNode() {
+
+    }
+
     CompositeNode(String program, int weight) {
+        super();
         this.program = program;
         this.weight = weight;
     }
 
-    CompositeNode(String program) {
-        this.program = program;
+    @Override
+    public String toString() {
+        return this.program;
     }
 
+    @Override
+    public void addParent(CompositeNode parent) {
+        this.parent = parent;
+    }
 
-    public void addChild(CompositeNode child) {
+    public void addChild(AbstractNode child) {
         children.add(child);
     }
 
@@ -29,12 +39,8 @@ public class CompositeNode {
         return weight;
     }
 
-    public ArrayList<CompositeNode> getChildren() {
+    public ArrayList<AbstractNode> getChildren() {
         return children;
-    }
-
-    public void addParent(CompositeNode parent)  {
-        this.parent = parent;
     }
 
     public CompositeNode getParent() {
