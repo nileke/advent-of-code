@@ -83,12 +83,12 @@ public class ProgramTree {
         }
     }
 
-    public ArrayList<AbstractNode> getProgramList() {
+    ArrayList<AbstractNode> getProgramList() {
         return programList;
     }
 
     public static void main(String[] args) {
-        String filepath = "data/input.txt";
+        String filepath = "dayseven/data/input.txt";
         try {
             ProgramTree programTree = new ProgramTree(filepath);
             programTree.findRoot();
