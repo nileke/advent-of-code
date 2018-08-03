@@ -1,5 +1,3 @@
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -14,7 +12,6 @@ public class RegisterReader {
     }
 
     public void parseRegister(String command) {
-
         Scanner sc = new Scanner(command);
         String reg = sc.next();
         String cmd = sc.next();
@@ -23,12 +20,10 @@ public class RegisterReader {
         String boolReg = sc.next();
         String boolOperator = sc.next();
         int boolVal = sc.nextInt();
-        this.register.putIfAbsent(boolReg, 0);
 
-        if (getBoolean(boolReg, boolOperator, boolVal)) {
-            this.register.put(reg, this.modifyRegister(cmd, val));
-        }
-
+        // Get modValue to alter register and set the value. 0 if boolean is false == no change to register value.
+        int modValue = getBoolean(boolReg, boolOperator, boolVal) ? this.getOperation(cmd, val) : 0;
+        this.register.compute(reg, (k, v) -> (v == null ? modValue : v + modValue));
     }
 
     /**
@@ -38,13 +33,13 @@ public class RegisterReader {
      * Translate the boolean statement from file
      * */
     private boolean getBoolean(String boolReg, String boolOperator, int boolVal) {
-        int val = this.register.get(boolReg);
+        int val = this.register.getOrDefault(boolReg, 0);
         switch(boolOperator) {
             case "==": {
                 return val == boolVal;
             }
             case "!=": {
-                return val!= boolVal;
+                return val != boolVal;
             }
             case "<": {
                 return val < boolVal;
@@ -62,8 +57,8 @@ public class RegisterReader {
         return false;
     }
 
-    private int modifyRegister(String instruction, int value) {
-        switch(instruction) {
+    private int getOperation(String operation, int value) {
+        switch(operation) {
             case "inc": {
                 return +value;
             }

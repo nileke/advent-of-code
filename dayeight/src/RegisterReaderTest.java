@@ -7,9 +7,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class RegisterReaderTest {
     RegisterReader register;
 
-    String command = "b inc 5 if b < 1";
+    String operation = "b inc 5 if b < 1";
 
-    String[] testCommands = {
+    String[] testOperations = {
                     "b inc 5 if a > 1",
                     "a inc 1 if b < 5",
                     "c dec -10 if a >= 1",
@@ -23,13 +23,13 @@ class RegisterReaderTest {
 
     @Test
     void testOneCommand() {
-        register.parseRegister(this.command);
+        register.parseRegister(this.operation);
         Assertions.assertEquals(5, (int)register.register.get("b"));
     }
 
     @Test
     void testMultipleCommands() {
-        for (String command : testCommands) {
+        for (String command : testOperations) {
             register.parseRegister(command);
         }
         Assertions.assertEquals(1, (int)register.register.get("a"));
