@@ -2,10 +2,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Map;
 
 class RegisterReaderTest {
-    RegisterReader register;
+    RegisterReader registerReader;
 
     String operation = "b inc 5 if b < 1";
 
@@ -18,22 +18,39 @@ class RegisterReaderTest {
 
     @BeforeEach
     void setUp() {
-        register = new RegisterReader();
+        registerReader = new RegisterReader();
+        for (String command : testOperations) {
+            this.registerReader.parseCommand(command);
+        }
     }
 
     @Test
     void testOneCommand() {
-        register.parseRegister(this.operation);
-        Assertions.assertEquals(5, (int)register.register.get("b"));
+        registerReader.parseCommand(this.operation);
+        Map register = registerReader.getRegister();
+        Assertions.assertEquals(5, (int)register.get("b"));
     }
 
     @Test
     void testMultipleCommands() {
-        for (String command : testOperations) {
-            register.parseRegister(command);
-        }
-        Assertions.assertEquals(1, (int)register.register.get("a"));
-        Assertions.assertEquals(0, (int)register.register.get("b"));
-        Assertions.assertEquals(-10, (int)register.register.get("c"));
+        Map register = this.registerReader.getRegister();
+        Assertions.assertEquals(1, (int)register.get("a"));
+        Assertions.assertEquals(0, (int)register.get("b"));
+        Assertions.assertEquals(-10, (int)register.get("c"));
     }
+
+    @Test
+    void testMaxValue() {
+        int calculatedMaxVal = registerReader.getMaxValue();
+        int expectedMaxVal = 1;
+        Assertions.assertEquals(expectedMaxVal, calculatedMaxVal);
+    }
+
+    @Test
+    void testHighestValue() {
+        int calculated = registerReader.getHighestParsedValue();
+        int expected = 10;
+        Assertions.assertEquals(expected, calculated);
+    }
+
 }
