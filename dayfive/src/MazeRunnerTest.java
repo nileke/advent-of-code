@@ -1,5 +1,4 @@
 import junit.framework.TestCase;
-import junit.framework.Assert;
 
 import static org.junit.Assert.assertArrayEquals;
 
